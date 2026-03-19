@@ -33,6 +33,11 @@ dependencies {
     implementation("io.ktor:ktor-server-cors-jvm:2.3.8")
     implementation("io.ktor:ktor-server-call-logging-jvm:2.3.8")
     
+    // Auth & Security
+    implementation("io.ktor:ktor-server-auth-jvm:2.3.8")
+    implementation("io.ktor:ktor-server-auth-jwt-jvm:2.3.8")
+    implementation("at.favre.lib:bcrypt:0.10.2")
+
     // Database
     implementation("org.jetbrains.exposed:exposed-core:0.47.0")
     implementation("org.jetbrains.exposed:exposed-dao:0.47.0")

@@ -10,13 +10,12 @@ fun main(args: Array<String>): Unit = EngineMain.main(args)
 
 fun Application.module() {
     configureSerialization()
+    configureSecurity()
     configureRouting()
     configureCors()
     
-    // Initialize Database
     DatabaseFactory.init()
 
-    // Start background worker
     launch {
         MonitoringWorker.start()
     }
