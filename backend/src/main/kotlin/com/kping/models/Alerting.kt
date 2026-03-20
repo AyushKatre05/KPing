@@ -18,7 +18,6 @@ object Incidents : UUIDTable("incidents") {
 }
 
 object AlertContacts : UUIDTable("alert_contacts") {
-    val userId = reference("user_id", Users).index()
     val type = varchar("type", 50) // e.g. "WEBHOOK"
     val destination = varchar("destination", 1024)
 }
