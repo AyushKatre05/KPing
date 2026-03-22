@@ -1,13 +1,12 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
+import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "KPing | Uptime Monitoring",
-  description: "Production-ready uptime monitoring for your services",
+export const metadata = {
+  title: "KPing Dashboard",
+  description: "Production-ready uptime monitoring system",
 };
 
 export default function RootLayout({
@@ -16,10 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} bg-slate-950 text-slate-200 min-h-screen`}>
+    <html lang="en" className="dark">
+      <body className={`${inter.className} bg-zinc-950 text-zinc-100 min-h-screen flex flex-col`}>
         <Navbar />
-        <main className="max-w-7xl mx-auto pt-24 pb-12 px-6">
+        <main className="flex-grow container mx-auto px-4 py-8">
           {children}
         </main>
       </body>
