@@ -35,6 +35,8 @@ fun Route.monitorRouting() {
                     it[httpMethod] = request.httpMethod
                     it[headers] = request.headers
                     it[requestBody] = request.requestBody
+                    it[monitorType] = request.monitorType
+                    it[port] = request.port
                 }.value
             }
             val monitor = transaction {
