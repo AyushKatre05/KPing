@@ -19,6 +19,8 @@ object Monitors : UUIDTable("monitors") {
     val httpMethod = varchar("http_method", 10).default("GET")
     val headers = text("headers").nullable()
     val requestBody = text("request_body").nullable()
+    val monitorType = varchar("monitor_type", 20).default("HTTP")
+    val port = integer("port").nullable()
     val createdAt = datetime("created_at").default(LocalDateTime.now())
 }
 
@@ -52,6 +54,8 @@ data class MonitorDto(
     val httpMethod: String,
     val headers: String?,
     val requestBody: String?,
+    val monitorType: String,
+    val port: Int?,
     @Serializable(with = LocalDateTimeSerializer::class)
     val createdAt: LocalDateTime
 )
@@ -79,7 +83,9 @@ data class CreateMonitorRequest(
     val timeoutMs: Int = 10000,
     val httpMethod: String = "GET",
     val headers: String? = null,
-    val requestBody: String? = null
+    val requestBody: String? = null,
+    val monitorType: String = "HTTP",
+    val port: Int? = null
 )
 
 @Serializable
@@ -116,6 +122,8 @@ fun ResultRow.toMonitorDto() = MonitorDto(
     httpMethod = this[Monitors.httpMethod],
     headers = this[Monitors.headers],
     requestBody = this[Monitors.requestBody],
+    monitorType = this[Monitors.monitorType],
+    port = this[Monitors.port],
     createdAt = this[Monitors.createdAt]
 )
 
