@@ -11,6 +11,8 @@ CREATE TABLE IF NOT EXISTS monitors (
     http_method VARCHAR(10) DEFAULT 'GET',
     headers TEXT,
     request_body TEXT,
+    monitor_type VARCHAR(20) DEFAULT 'HTTP',
+    port INTEGER,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 

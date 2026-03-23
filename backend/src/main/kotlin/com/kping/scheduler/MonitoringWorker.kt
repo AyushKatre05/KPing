@@ -15,11 +15,23 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDateTime
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
-import java.net.URL
-import javax.net.ssl.HttpsURLConnection
-import java.security.cert.X509Certificate
+import com.kping.scheduler.checkers.*
+import io.ktor.client.*
+import io.ktor.client.engine.cio.*
+import io.ktor.client.plugins.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
+import kotlinx.serialization.json.Json
 
 object MonitoringWorker {
+    private val checkers = mapOf(
+        "HTTP" to HttpChecker(),
+        "PING" to PingChecker(),
+        "TCP" to TcpChecker(),
+        "DNS" to DnsChecker()
+    )
+
     private val client = HttpClient(CIO) {
         install(HttpTimeout)
         expectSuccess = false
