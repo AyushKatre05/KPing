@@ -12,6 +12,7 @@ fun Application.configureRouting() {
         }
         route("/api") {
             monitorRouting()
+            statusPageRouting()
         }
     }
 }

@@ -45,6 +45,20 @@ CREATE TABLE IF NOT EXISTS incidents (
     error_cause VARCHAR(1024)
 );
 
+CREATE TABLE IF NOT EXISTS status_pages (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(100) UNIQUE NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS status_page_monitors (
+    status_page_id UUID REFERENCES status_pages(id) ON DELETE CASCADE,
+    monitor_id UUID REFERENCES monitors(id) ON DELETE CASCADE,
+    PRIMARY KEY (status_page_id, monitor_id)
+);
+
 CREATE TABLE IF NOT EXISTS alert_contacts (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     type VARCHAR(50) NOT NULL,
