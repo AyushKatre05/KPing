@@ -9,6 +9,10 @@ import kotlinx.coroutines.*
 fun main(args: Array<String>): Unit = EngineMain.main(args)
 
 fun Application.module() {
+    install(RateLimitingPlugin) {
+        maxRequests = 100 // Scale to 100 requests a minute per IP
+        refillIntervalMs = 60000
+    }
     configureSerialization()
     configureRouting()
     configureCors()
@@ -17,5 +21,8 @@ fun Application.module() {
 
     launch {
         MonitoringWorker.start()
+    }
+    launch {
+        com.kping.scheduler.DataGroomerWorker.start()
     }
 }
